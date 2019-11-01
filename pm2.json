@@ -12,7 +12,7 @@
       "min_uptime": "60s",
       "max_restarts": 10,
       "max_memory_restart": "512M",
-      "cron_restart": "* * * * *",
+      "cron_restart": "",
       "watch": false,
       "ignore_watch": [
         "node_modules",
