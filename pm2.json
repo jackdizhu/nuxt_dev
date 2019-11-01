@@ -1,0 +1,29 @@
+{
+  "apps": [
+    {
+      "name": "app1",
+      "cwd": "",
+      "script": "node_modules/nuxt/bin/nuxt.js",
+      "log_date_format": "YYYY-MM-DD HH:mm Z",
+      "error_file": "./logs/app-err.log",
+      "out_file": "./logs/app-out.log",
+      "pid_file": "",
+      "instances": 2,
+      "min_uptime": "60s",
+      "max_restarts": 10,
+      "max_memory_restart": "512M",
+      "cron_restart": "* * * * *",
+      "watch": false,
+      "ignore_watch": [
+        "node_modules",
+        "logs"
+      ],
+      "merge_logs": true,
+      "exec_interpreter": "node",
+      "exec_mode": "cluster",
+      "autorestart": false,
+      "vizion": false,
+      "args": ""
+    }
+  ]
+}

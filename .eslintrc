@@ -1,0 +1,32 @@
+{
+  "root": true,
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "sourceType": "module"
+  },
+  "extends": [
+    "@nuxtjs"
+  ],
+  "rules": {
+    "no-console": "off",
+    "prefer-const": "off",
+    "vue/mustache-interpolation-spacing": "off",
+    "vue/max-attributes-per-line": [
+      2,
+      {
+        "singleline": 10,
+        "multiline": {
+          "max": 10,
+          "allowFirstLine": true
+        }
+      }
+    ],
+    "vue/html-closing-bracket-newline": [
+      0,
+      {
+        "singleline": "never",
+        "multiline": "always"
+      }
+    ]
+  }
+}
