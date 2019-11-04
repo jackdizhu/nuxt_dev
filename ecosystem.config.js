@@ -1,13 +1,15 @@
-{
+const path = require('path')
+
+module.exports = {
   "apps": [
     {
       "name": "app1_git",
-      "cwd": "./",
+      "cwd": path.resolve(__dirname, './'),
       "script": "npm run start",
       "log_date_format": "YYYY-MM-DD HH:mm",
-      "error_file": "./logs/app-err.log",
-      "out_file": "./logs/app-out.log",
-      "pid_file": "./logs/app-pid.pid",
+      "error_file": path.resolve(__dirname, "./logs/app-err.log"),
+      "out_file": path.resolve(__dirname, "./logs/app-out.log"),
+      "pid_file": path.resolve(__dirname, "./logs/app-pid.pid"),
       "instances": 1,
       "min_uptime": "60s",
       "max_restarts": 10,
