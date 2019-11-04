@@ -27,10 +27,14 @@ module.exports = {
       "vizion": false,
       "args": "",
       "env_development": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "HOST": "127.0.0.1",
+        "PORT": "3000"
       },
       "env_production": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "HOST": "0,0,0,0",
+        "PORT": "3000"
       }
     }
   ]
