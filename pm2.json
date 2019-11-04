@@ -3,7 +3,7 @@
     {
       "name": "app1_git",
       "cwd": "./",
-      "script": "npm run start",
+      "script": "./server/index.js",
       "log_date_format": "YYYY-MM-DD HH:mm",
       "error_file": "./logs/app-err.log",
       "out_file": "./logs/app-out.log",

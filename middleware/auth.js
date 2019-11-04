@@ -29,7 +29,7 @@ export default function (ctx) {
   let redirectURL = '/'
   let token = (headers && headers.token) || (req && req.header && req.header.token) || query.token
   // 需要进行权限判断的页面开头
-  consola.info(`-->${isStatic} ${path} token: ${token}`)
+  consola.info(`-->${path} token: ${token}`)
   if (!isStatic && !token && path !== redirectURL) {
     redirect(redirectURL)
     return false

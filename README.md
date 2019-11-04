@@ -2,7 +2,7 @@
 
 * nuxt kog element-ui axios eslint serverMiddleware serverMiddleware
 * pm2 pm2.json
-* 日志文件不在配置文件
+* 日志文件不在配置文件(路径不能有大写)
 
 ```sh
 # 需要执行以下命令 
@@ -12,12 +12,12 @@ pm2 reloadLogs
 
 ```js
 /**
-// 以配置文件启动 pm2 start
+// 以配置文件启动 npm run build && pm2 start
 ecosystem.config.js
 */
 /**
 // 以配置文件方式启动
-pm2 start pm2.json
+npm run build && pm2 start pm2.json --env production
 */
 {
   "apps": [

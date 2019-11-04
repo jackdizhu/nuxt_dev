@@ -5,7 +5,7 @@ module.exports = {
     {
       "name": "app1_git",
       "cwd": path.resolve(__dirname, './'),
-      "script": "npm run start",
+      "script": "./server/index.js",
       "log_date_format": "YYYY-MM-DD HH:mm",
       "error_file": path.resolve(__dirname, "./logs/app-err.log"),
       "out_file": path.resolve(__dirname, "./logs/app-out.log"),

@@ -37,6 +37,20 @@ export default {
       appName: ''
     }
   },
+  mounted () {
+    let num = 0
+    let debug = this.$route.query.debug
+    if (!debug) {
+      return false
+    }
+    let time = setInterval(() => {
+      num++
+      this.$axios.get('http://localhost:3000/')
+      if (num > 1000) {
+        clearInterval(time)
+      }
+    }, 100)
+  },
   async asyncData ({ $axios }) {
     await $axios.get('http://localhost:3000/')
     return {
