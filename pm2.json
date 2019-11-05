@@ -27,12 +27,14 @@
       "env_development": {
         "NODE_ENV": "development",
         "HOST": "127.0.0.1",
-        "PORT": "3000"
+        "PORT": "3000",
+        "CONSOLA_LEVEL": 5
       },
       "env_production": {
         "NODE_ENV": "production",
         "HOST": "0.0.0.0",
-        "PORT": "3000"
+        "PORT": "3000",
+        "CONSOLA_LEVEL": 1
       }
     }
   ]

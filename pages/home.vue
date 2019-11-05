@@ -37,6 +37,12 @@ export default {
       appName: ''
     }
   },
+  async asyncData ({ $axios }) {
+    await $axios.get('http://localhost:3000/')
+    return {
+      appName: 'nuxtApp'
+    }
+  },
   mounted () {
     let num = 0
     let debug = this.$route.query.debug
@@ -50,12 +56,6 @@ export default {
         clearInterval(time)
       }
     }, 100)
-  },
-  async asyncData ({ $axios }) {
-    await $axios.get('http://localhost:3000/')
-    return {
-      appName: 'nuxtApp'
-    }
   }
 }
 </script>
