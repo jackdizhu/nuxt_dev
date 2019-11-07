@@ -22,11 +22,22 @@
 import Logo from '~/components/Logo.vue'
 
 export default {
+  __meta_type__: 'noAuth',
   components: {
     Logo
   },
+  head () {
+    return {
+      title: this.title,
+      meta: [
+        { hid: 'description', name: 'description', content: 'My custom description' },
+        { hid: 'param', name: 'type', content: '1' }
+      ]
+    }
+  },
   data () {
     return {
+      title: 'nuxt-index.vue',
       routeName: ''
     }
   },

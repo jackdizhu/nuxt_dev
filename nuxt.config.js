@@ -1,3 +1,4 @@
+const fs = require('fs')
 
 module.exports = {
   mode: 'universal',
@@ -5,7 +6,35 @@ module.exports = {
     '@/middleware/serverLog'
   ],
   router: {
-    middleware: 'auth'
+    middleware: 'auth',
+    extendRoutes (routes, resolve) {
+      // console.log(`extendRoutes --> path --> ${routes[0].path}`);
+      // console.log(`extendRoutes --> name --> ${routes[0].name}`);
+      for (let i = 0; i < routes.length; i++) {
+        let item = routes[i]
+        if (item.meta) {
+          item.meta.$type = 'auth'
+        } else {
+          item.meta = {
+            $type: 'auth'
+          }
+        }
+        // if (!item.component) {
+        //   continue
+        // }
+        let componentStr = ''
+        try {
+          componentStr = fs.readFileSync(item.component).toString()
+        } catch (error) {
+          componentStr = ''
+        }
+        if (/__meta_type__:\s*['"]([^'"]+)['"],/g.test(componentStr)) {
+          item.meta.$type = RegExp['$1']
+        } else {
+          item.meta.$type = 'auth'
+        }
+      }
+    }
   },
   /*
   ** Headers of the page
@@ -41,7 +70,8 @@ module.exports = {
   */
   plugins: [
     '@/plugins/element-ui',
-    '@/plugins/axios'
+    '@/plugins/axios',
+    '@/plugins/router'
   ],
   /*
   ** Nuxt.js dev-modules
