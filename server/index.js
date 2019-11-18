@@ -2,6 +2,7 @@ const Koa = require('koa')
 const { Nuxt, Builder } = require('nuxt')
 // const consola = require('consola')
 // consola.level = 1; // 配置环境变量 CONSOLA_LEVEL
+const cluster = require('cluster');
 
 const app = new Koa()
 
@@ -12,9 +13,9 @@ config.dev = app.env !== 'production'
 // console.log(Object.keys(console));
 const logger = function (isDev) {
   let keys = {
-    'log': 0, 'debug': 0, 'info': 1, 'success': 2, 'warn': 3, 'error': 4
+    'debug': -1, 'log': 0, 'info': 1, 'success': 2, 'warn': 3, 'error': 4
   }
-  let level = isDev ? 0 : 3
+  let level = isDev ? 0 : 1
   for (const key in keys) {
     if (Object.prototype.hasOwnProperty.call(keys, key)) {
       const item = keys[key]
@@ -41,11 +42,6 @@ logger(config.dev)
 // 日志配置
 // const log4js = require('../com/log4Util.js')
 // global.logger = config.dev ? log4js.consoleLog : log4js.errorLog
-
-process.on('SIGINT', function () {
-  console.log('----> SIGINT ')
-  process.exit(1)
-})
 
 async function start () {
   // app.use(async (ctx, next) => {
@@ -78,12 +74,39 @@ async function start () {
     nuxt.render(ctx.req, ctx.res)
   })
 
-  app
-    .listen(port, host)
-    .on('error', function (error) {
-      console.error(error)
+  // 平滑重启
+  let isRun = false
+  let serve = app.listen(port, host)
+  serve.on('listening', function () {
+    isRun = true
+    console.info(`listening http://${host}:${port}`)
+  })
+  serve.on('error', function (error) {
+    console.error(error)
+  })
+  process.on('exit', function () {
+    console.info('-- exit --')
+  })
+  // 等待响应处理完成
+  process.on('SIGINT', function () {
+    console.info('----> SIGINT ')
+    if (!isRun) {
+      // 通知主进程 不再接收任务派发
+      cluster.worker && cluster.worker.disconnect();
+      process.exit(1);
+      return false
+    }
+    // 停止接收新请求
+    serve.close((err) => {
+      if (!err) {
+        process.exit(1);
+      } else {
+        console.error(err)
+      }
     })
-  console.info(`listening http://${host}:${port}`)
+    // 通知主进程 不再接收任务派发
+    cluster.worker && cluster.worker.disconnect();
+  })
 }
 
 start()

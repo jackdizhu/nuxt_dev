@@ -17,7 +17,23 @@ ecosystem.config.js
 */
 /**
 // 以配置文件方式启动
+// 启动
 npm run build && pm2 start pm2.json --env production
+// 重载进程
+npm run build && pm2 reload all --update-env production
+// 重新启动(存在无服务 时间间隔)
+npm run build && pm2 restart all --update-env production
+// restart = stop+start
+// reload = 重新读取配置文件
+// reload 实现了0秒的停机重新加载
+// pm2 日志管理
+pm2 install pm2-logrotate
+pm2 set pm2-logrotate:max_size 100K // 日志文件大小
+pm2 set pm2-logrotate:retain 30 // 保留的日志文件个数
+pm2 set pm2-logrotate:compress false // gzip 压缩
+pm2 set pm2-logrotate:rotateModule false // 分割 pm2 日志
+pm2 set pm2-logrotate:rotateInterval '0 0 * * *' // 设置强制分割，默认值是0 0 * * * 每天晚上0点分割
+pm2 conf pm2-logrotate // 查看配置
 */
 {
   "apps": [
