@@ -3,7 +3,9 @@ const fs = require('fs')
 module.exports = {
   mode: 'universal',
   serverMiddleware: [
-    '@/middleware/serverLog'
+    '@/middleware/serverLog',
+    { path: '/', handler: '@/middleware/serverPageCache.js' },
+    { path: '/home', handler: '@/middleware/serverPageCache.js' }
   ],
   router: {
     middleware: 'auth',
