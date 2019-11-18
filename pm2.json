@@ -8,7 +8,7 @@
       "error_file": "./logs/app-err.log",
       "out_file": "./logs/app-out.log",
       "pid_file": "./logs/app-pid.pid",
-      "instances": "max",
+      "instances": -1,
       "min_uptime": "60s",
       "max_restarts": 10,
       "max_memory_restart": "512M",
@@ -18,7 +18,7 @@
         "node_modules",
         "logs"
       ],
-      "merge_logs": false,
+      "merge_logs": true,
       "exec_interpreter": "node",
       "exec_mode": "cluster",
       "autorestart": true,

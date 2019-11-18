@@ -34,6 +34,8 @@ pm2 set pm2-logrotate:compress false // gzip 压缩
 pm2 set pm2-logrotate:rotateModule false // 分割 pm2 日志
 pm2 set pm2-logrotate:rotateInterval '0 0 * * *' // 设置强制分割，默认值是0 0 * * * 每天晚上0点分割
 pm2 conf pm2-logrotate // 查看配置
+// pm2 config 需要配置日志合并
+"merge_logs": true
 */
 {
   "apps": [
