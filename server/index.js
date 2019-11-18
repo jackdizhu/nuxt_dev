@@ -101,7 +101,11 @@ async function start () {
       if (!err) {
         process.exit(1);
       } else {
+        // 15秒后 强制退出
         console.error(err)
+        setTimeout(function () {
+          process.exit(1);
+        }, 15000)
       }
     })
     // 通知主进程 不再接收任务派发
