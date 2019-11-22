@@ -91,6 +91,14 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    babel: {
+      presets ({ isServer }) {
+        const targets = isServer ? { node: '10' } : { ie: '9' }
+        return [
+          [require.resolve('@nuxt/babel-preset-app'), { targets }]
+        ]
+      }
+    },
     transpile: [/^element-ui/],
     /*
     ** You can extend webpack config here
