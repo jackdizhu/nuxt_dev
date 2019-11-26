@@ -92,6 +92,7 @@ module.exports = {
   */
   build: {
     babel: {
+      babelrc: true, // 默认false
       presets ({ isServer }) {
         const targets = isServer ? { node: 'current' } : { ie: '9' }
         return [
